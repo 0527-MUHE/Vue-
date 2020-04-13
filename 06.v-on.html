@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- Vue中提供了v-on事件绑定机制 (浏览器端常见的事件都可以）-->
+      <input type="button" value="按钮" :title="mytitle" v-on:click="show" />
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          mytitle: "123"
+        },
+        methods: {
+          //这个methods属性中定义了当前Vue实例中所有可用方法
+          show: function() {
+            alert("Hello");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

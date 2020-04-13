@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+      .inner {
+        height: 150px;
+        background-color: darkcyan;
+      }
+      .outer {
+        padding: 40px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+      <!-- self只会阻止自己身上的冒泡行为，并不会真正阻止冒泡行为 -->
+    <!-- <div class="outer" id="app" @click="divHandler2">
+      <div class="inner" @click="divHandler">
+        <input type="button" value="戳他" @click.stop="btnHandler" />
+      </div>
+    </div> -->
+    <div class="outer" id="app" @click="divHandler2">
+        <div class="inner" @click.self="divHandler">
+          <input type="button" value="戳他" @click="btnHandler" />
+        </div>
+      </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+          //ES6的语法
+          divHandler() {
+            console.log("触发了inner div的点击事件");
+          },
+          btnHandler() {
+            console.log("触发了button的点击事件");
+          },
+          divHandler2() {
+            console.log("触发了outer div的点击事件");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

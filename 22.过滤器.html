@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 过滤器调用时的格式{{name | nameope}} -->
+      <p>{{msg | msgFormat('疯狂')|text}}</p>
+    </div>
+    <script>
+      //   过滤器的定义语法
+      //   Vue.filter('过滤器的名称',function(){})
+      // 过滤器中的function第一个参数固定，永远都是过滤器管到符前面传递过来的数据
+      //注意过滤器可以重复调用，也可以同时调用多个
+      Vue.filter("msgFormat", function(msg, arg) {
+        //   字符串的replace方法，第一个参数，除了可以写一个字符串之外，还可以定义一个正则
+        // return msg.replace("单纯", "邪恶");
+        return msg.replace(/单纯/g, arg);
+      });
+      // 全局过滤器
+      Vue.filter("text", function(msg) {
+        return msg + "全局过滤器";
+      });
+
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          msg: "曾经的我单纯，非常单纯"
+        },
+        methods: {},
+        filters: {
+          //定义私有过滤器  ，过滤器有两个条件：过滤器名称和处理函数
+          text: function(msg) {
+            return msg + "私有过滤器";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

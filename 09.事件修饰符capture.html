@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+      .inner {
+        height: 150px;
+        background-color: darkcyan;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- .capture实现捕获触发事件的机制，从外到内触发事件 -->
+    <div id="app" class="inner" @click.capture="divHandler">
+      <input type="button" value="戳他" @click="btnHandler" />
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+          //ES6的语法
+          divHandler() {
+            console.log("触发了inner div的点击事件");
+          },
+          btnHandler() {
+            console.log("触发了button的点击事件");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

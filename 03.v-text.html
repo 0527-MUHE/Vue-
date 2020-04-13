@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 插值表达式和v-text差不多,都可以渲染内容 -->
+      <!-- 区别:
+        1.默认v-text网络差时,并没有闪烁的问题 -->
+      <p>{{msg}}</p>
+      <h4 v-text="msg"></h4>
+      <!-- 2.v-text会覆盖原本的内容,但是插值表达式只会替换自己这个占位符,不会把整个元素的内容清空 -->
+      <p>++++{{msg+'HHh'}}----</p>
+      <h4 v-text="msg+'jjj'">=====</h4>
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          msg: "123"
+        }
+      });
+    </script>
+  </body>
+</html>

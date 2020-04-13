@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!--插值表达式和v-text都不能识别标签,v-html可以 -->
+        <h4>{{msg}}</h4>
+        <h4 v-text="msg"></h4>
+        <h4 v-html="msg"></h4>
+    </div>
+    <script src="./lib/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '<h1>哈哈哈</h1>'
+            }
+        })
+    </script>
+</body>
+</html>

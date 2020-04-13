@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+      .red {
+        color: red;
+      }
+      .thin {
+        font-weight: 200;
+      }
+      .italict {
+        font-style: italic;
+      }
+      .active {
+        letter-spacing: 0.5em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 第一种使用方式，数组。注意这里的class需要v-bind做数据绑定 -->
+      <h1 :class="['thin','red']">数组</h1>
+      <!-- 第二种方式，数组中使用三元表达式 -->
+      <h1 :class="['thin','red',flag ? 'active':'']">数组中使用三元表达式</h1>
+      <!-- 第三种方式：数组中嵌套对象,由于三元表达式写法不方便，可以用对象嵌套数组来写 -->
+      <h1 :class="['thin','red',{'active':flag}]">数组中嵌套对象</h1>
+      <!-- 第四种方式：直接使用对象 -->
+      <h1 :class="{red:true,thin:true,italict:true,active:false}">
+        直接使用对象
+      </h1>
+      <h1 :class="classObj">
+        直接使用对象2
+      </h1>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          flag: true,
+          classObj:{red:true,thin:true,italict:true,active:false}
+        }
+      });
+    </script>
+  </body>
+</html>
