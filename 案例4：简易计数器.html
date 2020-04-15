@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="lib/vue.js"></script>
+    <title>Document</title>
+    <style>
+      #p1,
+      #p2,
+      #p3 {
+        float: left;
+        width: 80px;
+        height: 50px;
+        font-size: 24px;
+        text-align: center;
+        line-height: 50px;
+        margin: 0;
+      }
+      #p1,
+      #p3 {
+        color: #fff;
+        background-color: #444;
+        cursor: pointer;
+      }
+      #p2 {
+        background-color: #999;
+        color: #333;
+      }
+      #p1 {
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
+      }
+      #p3 {
+        border-top-right-radius: 12px;
+        border-bottom-right-radius: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="counter">
+      <div id="p1" @click="subtract">-</div>
+      <div id="p2">{{msg}}</div>
+      <div id="p3" @click="add()">+</div>
+    </div>
+    <script>
+      vm = new Vue({
+        el: "#counter",
+        data: {
+          msg: "0"
+        },
+        methods: {
+          add: function() {
+            if (this.msg < 10) {
+              this.msg = parseInt(this.msg) + 1;
+            } else {
+              alert("别点啦，太大了！");
+            }
+          },
+          subtract: function() {
+            if (this.msg > 0) {
+              this.msg = parseInt(this.msg) - 1;
+            } else {
+              alert("别点啦，太小了！");
+            }
+          }
+        }
+      });
+    </script>
+
+    <!-- 
+        总结：
+    1.创建Vue示例时，el（挂载点），data（数据），methods（方法）
+    2.v-on指令的作用是绑定事件，简写为@
+    3.this.msg获取data中的msg值
+    -->
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- 1.导入Vue包 -->
+    <script src="./lib/vue.js"></script>
+  </head>
+  <body>
+    <!-- 2.创建一个要控制的区域 -->
+    <div id="app">
+      <input type="button" value="浪起来" @click="lang" />
+      <input type="button" value="别浪" @click="stop" />
+      <h4 v-text="msg"></h4>
+    </div>
+    <script>
+      // 注意在vm实例中，如果想要调用data中的数据或者调用methods中的方法，必须通过this.属性名，
+      // this.方法名来进行访问，这里的this就表示我们new出来的vm实例对象
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          msg: "猥琐发育，别浪",
+          intervalId: null //在data上定义定时器id
+        },
+        methods: {
+          lang: function() {
+            // console.log(this.msg);
+
+            if (this.intervalId != null) return;
+
+            //箭头函数，this指向外层调用者
+            this.intervalId = setInterval(() => {
+              // 获取到头的第一个字符
+              var start = this.msg.substring(0, 1);
+              // 获取到后面的所有字符
+              var end = this.msg.substring(1);
+              // 重新拼接得到新的字符串，并赋值给msg
+              this.msg = end + start;
+            }, 400);
+          },
+          stop: function() {
+            clearInterval(this.intervalId);
+            //每当清除了定时器，需要重新把intervalId重置为null
+            this.intervalId=null;
+          }
+        }
+      });
+    </script>
+    <!-- 注意：Vue实例，会监听自己身上的data中所有数据改变，只要数据一发生改变，就会自动把更新的数据，
+    从data同步到页面上 。好处：只需要关注数据，不需要考虑如何渲染到页面-->
+    <!-- 分析
+    1.给【浪起来】按钮，绑定一个点击事件   v-on
+    2.在按钮的事件处理函数中，写相关业务逻辑代码：拿到msg字符串，然后调用字符串
+    的substring来进行字符串的截取工作，把第一个字符截取出来，放到最后一个位置
+    3.为了实现点击一下按钮，自动截取的功能，需要把二步骤的代码放到一个定时器中 -->
+  </body>
+</html>
