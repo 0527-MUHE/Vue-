@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="vue.js"></script>
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #container {
+        width: 668px;
+        height: 448px;
+        position: relative;
+        margin: 20px auto;
+      }
+      img {
+        display: block;
+        width: 668px;
+        height: 448px;
+      }
+      span {
+        background-color: #333;
+        opacity: 0.7;
+        width: 50px;
+        height: 70px;
+        line-height: 70px;
+        text-align: center;
+        font-size: 36px;
+        color: rgb(228, 227, 227);
+        position: absolute;
+        margin-top: -280px;
+      }
+      span:hover {
+        background-color: #333;
+        opacity: 0.5;
+      }
+      #prev {
+        left: 0px;
+      }
+      #next {
+        right: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="img">
+        <img :src="imgs[index]" />
+      </div>
+      <div id="span">
+        <span id="prev" @click="prev()" v-show="index!=0"><</span>
+        <span id="next" @click="next()" v-show="index!=imgs.length-1">></span>
+      </div>
+    </div>
+    <script>
+      vm = new Vue({
+        el: "#container",
+        data: {
+          imgs: ["imgs/1.jpg", "imgs/2.jpg", "imgs/3.jpg"],
+          index: 0
+        },
+        methods: {
+          prev: function() {
+            if (this.index > 0) {
+              this.index--;
+            } else {
+              this.index = 0;
+            }
+          },
+          next: function() {
+            if (this.index < this.imgs.length-1) {
+              this.index++;
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
